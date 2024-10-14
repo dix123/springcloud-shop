@@ -9,14 +9,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>mallcloud-common</artifactId>
+    <artifactId>mallcloud-api</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>mallcloud-common-core</module>
-        <module>mallcloud-common-cache</module>
-        <module>mallcloud-common-security</module>
+        <module>mallcloud-api-auth</module>
     </modules>
-
 
 
 </project>
