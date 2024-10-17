@@ -9,18 +9,25 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>mallcloud-common-security</artifactId>
+    <artifactId>mallcloud-common-database</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.dix.cloud</groupId>
-            <artifactId>mallcloud-api-auth</artifactId>
+            <artifactId>mallcloud-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.dix.cloud</groupId>
-            <artifactId>mallcloud-api-rbac</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
     </dependencies>
 

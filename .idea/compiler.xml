@@ -7,9 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mallcloud-api-auth" />
-        <module name="mallcloud-auth" />
+        <module name="mallcloud-common-database" />
         <module name="mallcloud-common-core" />
+        <module name="mallcloud-rbac" />
+        <module name="mallcloud-auth" />
         <module name="mallcloud-common-security" />
+        <module name="mallcloud-api-rbac" />
         <module name="mallcloud-common-cache" />
       </profile>
     </annotationProcessing>
@@ -25,11 +28,14 @@
       <module name="mallclou-common-cache" options="-parameters" />
       <module name="mallcloud-api" options="-parameters" />
       <module name="mallcloud-api-auth" options="-parameters" />
+      <module name="mallcloud-api-rbac" options="-parameters" />
       <module name="mallcloud-auth" options="-parameters" />
       <module name="mallcloud-common" options="-parameters" />
       <module name="mallcloud-common-cache" options="-parameters" />
       <module name="mallcloud-common-core" options="-parameters" />
+      <module name="mallcloud-common-database" options="-parameters" />
       <module name="mallcloud-common-security" options="-parameters" />
+      <module name="mallcloud-rbac" options="-parameters" />
       <module name="untitled" options="-parameters" />
       <module name="untitled1" options="-parameters" />
     </option>

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Server;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @Author: Base
@@ -32,6 +33,10 @@ public class ServerResponseEntity<T> implements Serializable {
      *数据
      */
     private T data;
+
+    public boolean isSuccess() {
+        return Objects.equals(ResponseEnum.OK.value(), this.code);
+    }
 
     public static <T> ServerResponseEntity<T> success(T data) {
         ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
@@ -69,6 +74,13 @@ public class ServerResponseEntity<T> implements Serializable {
         ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
         serverResponseEntity.setCode(ResponseEnum.SHOW_FAIL.value());
         serverResponseEntity.setMsg(msg);
+        return serverResponseEntity;
+    }
+
+    public static <T> ServerResponseEntity<T> transform(ServerResponseEntity<?> oldServerResponseEntity) {
+        ServerResponseEntity<T> serverResponseEntity = new ServerResponseEntity<>();
+        serverResponseEntity.setMsg(oldServerResponseEntity.getMsg());
+        serverResponseEntity.setCode(oldServerResponseEntity.getCode());
         return serverResponseEntity;
     }
 }

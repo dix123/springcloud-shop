@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mallcloud-api-auth</module>
+        <module>mallcloud-api-rbac</module>
     </modules>
 
 

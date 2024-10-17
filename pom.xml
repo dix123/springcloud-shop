@@ -12,6 +12,7 @@
         <module>mallcloud-common</module>
         <module>mallcloud-auth</module>
         <module>mallcloud-api</module>
+        <module>mallcloud-rbac</module>
     </modules>
     <packaging>pom</packaging>
 

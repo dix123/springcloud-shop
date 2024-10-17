@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dix.cloud.auth.mapper.AuthAccountMapper">
+    <select id="getAuthAccountByUsername" resultType="com.dix.cloud.common.security.bo.AuthAccountInVerifyBO">
+        select user_id, sys_type,uid,password,is_admin,tenant_id, status from auth_account
+        where sys_type = #{sysType} and status != -1
+        <if test="inputUsername == 1">
+            and username = #{inputUsername}
+        </if>
+    </select>
+</mapper>

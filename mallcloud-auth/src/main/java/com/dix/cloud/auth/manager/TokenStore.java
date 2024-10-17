@@ -6,7 +6,9 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.dix.cloud.api.auth.bo.UserInfoInTokenBO;
 import com.dix.cloud.api.auth.constant.SysTypeEnum;
+import com.dix.cloud.api.auth.vo.TokenInfoVO;
 import com.dix.cloud.common.cache.constant.CacheNames;
+import com.dix.cloud.common.response.ServerResponseEntity;
 import com.dix.cloud.common.security.bo.TokenInfoBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,8 +86,71 @@ public class TokenStore {
         return tokenInfoBO;
     }
 
+    public TokenInfoVO storeAndGetVo(UserInfoInTokenBO userInfoInToken) {
+        TokenInfoBO tokenInfoBO = storeAccessToken(userInfoInToken);
+
+        TokenInfoVO tokenInfoVO = new TokenInfoVO();
+        tokenInfoVO.setAccessToken(tokenInfoBO.getAccessToken());
+        tokenInfoVO.setRefreshToken(tokenInfoBO.getRefreshToken());
+        tokenInfoVO.setExpiresIn(tokenInfoBO.getExpiresIn());
+        return tokenInfoVO;
+    }
+
     private String encryptToken(String accessToken, Integer sysType) {
         return Base64.encode(accessToken + System.currentTimeMillis() + sysType);
+    }
+
+    public ServerResponseEntity<UserInfoInTokenBO> getUserInfoByAccessToken(String accessToken, boolean needDecrypt) {
+        if (StrUtil.isBlank(accessToken)) {
+            return ServerResponseEntity.showFailMsg("accessToken is blank");
+        }
+        String realAccessToken;
+        if (needDecrypt) {
+            ServerResponseEntity<String> decryptTokenEntity = decryptToken(accessToken);
+            if (!decryptTokenEntity.isSuccess()) {
+                return ServerResponseEntity.transform(decryptTokenEntity);
+            }
+            realAccessToken = decryptTokenEntity.getData();
+        }
+        else {
+            realAccessToken = accessToken;
+        }
+        UserInfoInTokenBO userInfoInTokenBO = (UserInfoInTokenBO) redisTemplate.opsForValue()
+                .get(getAccessKey(realAccessToken));
+
+        if (userInfoInTokenBO == null) {
+            return ServerResponseEntity.showFailMsg("accessToken 已过期");
+        }
+        return ServerResponseEntity.success(userInfoInTokenBO);
+    }
+
+    private ServerResponseEntity<String> decryptToken(String data) {
+        String decryptStr;
+        String decryptToken;
+        try {
+            decryptStr = Base64.decodeStr(data);
+            decryptToken = decryptStr.substring(0,32);
+            // 创建token的时间，token使用时效性，防止攻击者通过一堆的尝试找到aes的密码，虽然aes是目前几乎最好的加密算法
+            long createTokenTime = Long.parseLong(decryptStr.substring(32,45));
+            // 系统类型
+            int sysType = Integer.parseInt(decryptStr.substring(45));
+            // token的过期时间
+            int expiresIn = getExpiresIn(sysType);
+            long second = 1000L;
+            if (System.currentTimeMillis() - createTokenTime > expiresIn * second) {
+                return ServerResponseEntity.showFailMsg("token 格式有误");
+            }
+        }
+        catch (Exception e) {
+            log.error(e.getMessage());
+            return ServerResponseEntity.showFailMsg("token 格式有误");
+        }
+
+        // 防止解密后的token是脚本，从而对redis进行攻击，uuid只能是数字和小写字母
+        if (true) {
+            return ServerResponseEntity.showFailMsg("token 格式有误");
+        }
+        return ServerResponseEntity.success(decryptToken);
     }
 
     private String getRefreshToAccesskey(String refreshToken) {

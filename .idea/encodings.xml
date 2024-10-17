@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/mallcloud-api/mallcloud-api-auth/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-api/mallcloud-api-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mallcloud-api/mallcloud-api-rbac/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mallcloud-api/mallcloud-api-rbac/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-auth/src/main/java" charset="UTF-8" />
@@ -13,10 +15,14 @@
     <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-cache/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-database/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-database/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-security/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-common/mallcloud-common-security/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mallcloud-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mallcloud-rbac/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/mallcloud-rbac/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/untitled/src/main/java" charset="UTF-8" />
